@@ -7,8 +7,7 @@ package
     import Box2D.Collision.Shapes.*;
     import Box2D.Common.Math.*;
 
-    public class B2FlxSprite extends FlxSprite
-    {
+    public class B2FlxSprite extends FlxSprite{
         private var ratio:Number = 30;
 
         public var _fixDef:b2FixtureDef;
@@ -45,7 +44,9 @@ package
             super.update();
         }
 
-        public function createBody(myType:uint, _bodyDef:b2BodyDef=null, _fixDef:b2FixtureDef=null):void
+        public function createBody(myType:uint, _bodyDef:b2BodyDef=null,
+                                   _fixDef:b2FixtureDef=null, _category:Number=0,
+                                   _mask:Number=0):void
         {
             var boxShape:b2PolygonShape = new b2PolygonShape();
             boxShape.SetAsBox((width/2) / ratio, (height/2) /ratio);
@@ -56,6 +57,8 @@ package
                 _fixDef.restitution = _restitution;
                 _fixDef.friction = _friction;
                 _fixDef.shape = boxShape;
+                _fixDef.filter.categoryBits = _category;
+                _fixDef.filter.maskBits = _mask;
             }
 
             if(_bodyDef == null){
