@@ -56,10 +56,10 @@ package
                 _fixDef.density = _density;
                 _fixDef.restitution = _restitution;
                 _fixDef.friction = _friction;
-                _fixDef.shape = boxShape;
                 _fixDef.filter.categoryBits = _category;
                 _fixDef.filter.maskBits = _mask;
             }
+            _fixDef.shape = boxShape;
 
             if(_bodyDef == null){
                 _bodyDef = new b2BodyDef();

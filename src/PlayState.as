@@ -23,6 +23,15 @@ package{
             add(floor);
 
             dad = new Dad(_world);
+
+            var fixtureDef:b2FixtureDef = new b2FixtureDef();
+            fixtureDef.density = .001;
+
+            var fish:B2FlxSprite = new B2FlxSprite(320, 240, 20, 20, _world);
+            fish.createBody(b2Body.b2_dynamicBody, null, fixtureDef);
+            fish.makeGraphic(20, 20);
+            add(fish);
+            dad.hook(fish);
         }
 
         private function setupWorld():void{

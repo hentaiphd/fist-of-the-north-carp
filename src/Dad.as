@@ -12,6 +12,8 @@ package{
         private var rod:B2FlxSprite;
         private var jointBase:B2FlxSprite;
         private var rodJoint:b2RevoluteJoint;
+        private var hookJoint:b2RevoluteJoint;
+        private var link:b2Body;
 
         public static const RODBITS:Number = 1;
         public static const LINEBITS:Number = 2;
@@ -36,6 +38,16 @@ package{
             }
 
             super.update();
+        }
+
+        public function hook(fish:B2FlxSprite):void{
+            if(fish == null || hookJoint != null){
+                _world.DestroyJoint(hookJoint);
+                if(fish == null){
+                    return;
+                }
+            }
+            hookJoint = revoluteJoint(link, fish._obj, new b2Vec2(0, 0), new b2Vec2(0, 0));
         }
 
         private function setupRod():void{
@@ -87,7 +99,7 @@ package{
                     _link.createBody(b2Body.b2_dynamicBody,bodyDef,fixtureDef);
                     _link.makeGraphic(2, chainLength+10);
                     FlxG.state.add(_link);
-                    var link:b2Body=_link._obj;
+                    link = _link._obj;
                     revoluteJoint(rod._obj,link,new b2Vec2(0,50/ratio),new b2Vec2(0,-chainLength/ratio));
                 }
                 else {
@@ -102,13 +114,13 @@ package{
             }
         }
 
-        private function revoluteJoint(bodyA:b2Body,bodyB:b2Body,anchorA:b2Vec2,anchorB:b2Vec2):void {
+        private function revoluteJoint(bodyA:b2Body,bodyB:b2Body,anchorA:b2Vec2,anchorB:b2Vec2):b2RevoluteJoint{
             var revoluteJointDef:b2RevoluteJointDef=new b2RevoluteJointDef();
             revoluteJointDef.localAnchorA.Set(anchorA.x,anchorA.y);
             revoluteJointDef.localAnchorB.Set(anchorB.x,anchorB.y);
             revoluteJointDef.bodyA=bodyA;
             revoluteJointDef.bodyB=bodyB;
-            _world.CreateJoint(revoluteJointDef);
+            return _world.CreateJoint(revoluteJointDef) as b2RevoluteJoint;
         }
     }
 }
