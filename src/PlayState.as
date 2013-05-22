@@ -30,7 +30,7 @@ package{
             add(player);
 
             var fixtureDef:b2FixtureDef = new b2FixtureDef();
-            fixtureDef.density = 1;
+            fixtureDef.density = .5;
 
             fish = new B2FlxSprite(320, 240, 20, 20, _world);
             fish.createBody(b2Body.b2_dynamicBody, null, fixtureDef);

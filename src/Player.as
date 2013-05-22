@@ -7,16 +7,15 @@ package{
     import Box2D.Dynamics.Joints.*;
 
     public class Player extends FlxSprite{
-        private var runSpeed:int = 200;
+        private var runSpeed:int = 80;
         private var _jumppower:int = 230;
         private var jumping:Boolean = false;
 
         public function Player(x:int, y:int){
             this.makeGraphic(x,y);
 
-            drag.x = runSpeed*3;
+            drag.x = runSpeed*8;
             drag.y = runSpeed*3;
-
         }
 
         override public function update():void{

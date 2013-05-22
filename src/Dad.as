@@ -56,10 +56,10 @@ package{
             jointBase.createBody(b2Body.b2_staticBody,null, null, RODBITS);
             jointBase.makeGraphic(5, 5);
 
-            rod = new B2FlxSprite(jointBase.x, jointBase.y, 3, 100, _world);
-            rod.angle = 30;
+            rod = new B2FlxSprite(jointBase.x, jointBase.y-100, 3, 100, _world);
+            rod.angle = 210;
             rod.createBody(b2Body.b2_dynamicBody, null, null, RODBITS);
-            rod._obj.SetAngle(1.9*Math.PI);
+            rod._obj.SetAngle(2.9*Math.PI);
             rod.makeGraphic(3, 100);
 
             FlxG.state.add(jointBase);
@@ -70,7 +70,7 @@ package{
                 new b2Vec2(jointBase._obj.GetWorldCenter().x,
                            jointBase._obj.GetWorldCenter().y));
             revJointDef.enableMotor = true;
-            revJointDef.motorSpeed = -8;
+            revJointDef.motorSpeed = -30;
             revJointDef.lowerAngle = -0.5 * Math.PI;
             revJointDef.upperAngle = 0.5 * Math.PI;
             revJointDef.enableLimit = true;
@@ -79,12 +79,12 @@ package{
         }
 
         private function setupLine():void{
-            var chainLength:int = 4;
+            var chainLength:int = 8;
             var polygonShape:b2PolygonShape = new b2PolygonShape();
             polygonShape.SetAsBox(5/ratio,chainLength/ratio);
 
             var fixtureDef:b2FixtureDef = new b2FixtureDef();
-            fixtureDef.density=10;
+            fixtureDef.density=5;
             fixtureDef.shape=polygonShape;
             fixtureDef.filter.categoryBits = LINEBITS;
             fixtureDef.filter.maskBits = 0;
@@ -92,7 +92,7 @@ package{
             var bodyDef:b2BodyDef = new b2BodyDef();
             bodyDef.type=b2Body.b2_dynamicBody;
 
-            for (var i:Number = 0; i <= 35; i++) {
+            for (var i:Number = 0; i <= 26; i++) {
                 bodyDef.position.Set(320/ratio,(chainLength+2*chainLength*i)/ratio);
                 if (i==0) {
                     var _link:B2FlxSprite = new B2FlxSprite(320, 240, 2, chainLength, _world);
