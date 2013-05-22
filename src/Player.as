@@ -8,7 +8,7 @@ package{
 
     public class Player extends FlxSprite{
         private var runSpeed:int = 5;
-        private var _jumppower:int = 230;
+        private var _jumppower:int = 290;
         private var jumping:Boolean = false;
         public var lastUnhookTime:Number = 0;
 
@@ -23,7 +23,7 @@ package{
             super.update();
             borderCollide();
             acceleration.x = 0;
-            acceleration.y = 400;
+            acceleration.y = 1000;
 
             if(FlxG.keys.LEFT) {
                 x -= runSpeed;
@@ -35,9 +35,13 @@ package{
                 jumping = false;
             }
 
-            if((FlxG.keys.justPressed("SPACE") || FlxG.keys.justPressed("UP")) && jumping == false){
-                jumping = true;
-                velocity.y = -_jumppower;
+            if((FlxG.keys.SPACE || FlxG.keys.UP)){
+                if(!jumping){
+                    jumping = true;
+                    velocity.y -= _jumppower;
+                } else {
+                    velocity.y -= 10;
+                }
             }
         }
 

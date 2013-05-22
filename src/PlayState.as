@@ -70,6 +70,8 @@ package{
             dad.hook(fish);
         }
 
+        public function spriteCollide2(floor:B2FlxTileblock,player:Player):void{}
+        public function deadFishCollide(dead:FlxSprite,player:Player):void{}
         public function spriteCollide(fish:B2FlxSprite,player:Player):void{
             if(player.isTouching(FlxObject.DOWN) && fish.isTouching(FlxObject.UP)){
                 deadFish.add(fish);
@@ -81,12 +83,6 @@ package{
                 player.fill(0xFFFF0000);
                 FlxG.switchState(new EndgameState());
             }
-        }
-
-        public function spriteCollide2(floor:B2FlxTileblock,player:Player):void{
-        }
-
-        public function deadFishCollide(dead:FlxSprite,player:Player):void{
         }
 
         override public function update():void{
