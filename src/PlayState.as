@@ -14,11 +14,13 @@ package{
         private var ratio:Number = 30;
         public var dad:Dad;
         public var player:Player;
+        public var floor:B2FlxTileblock;
+        public var fish:B2FlxSprite;
 
         override public function create():void{
             setupWorld();
 
-            var floor:B2FlxTileblock = new B2FlxTileblock(0, 400, 640, 80, _world);
+            floor = new B2FlxTileblock(0, 400, 640, 80, _world);
             floor.createBody();
             floor.makeGraphic(480,640);
             add(floor);
@@ -30,7 +32,7 @@ package{
             var fixtureDef:b2FixtureDef = new b2FixtureDef();
             fixtureDef.density = .001;
 
-            var fish:B2FlxSprite = new B2FlxSprite(320, 240, 20, 20, _world);
+            fish = new B2FlxSprite(320, 240, 20, 20, _world);
             fish.createBody(b2Body.b2_dynamicBody, null, fixtureDef);
             fish.makeGraphic(20, 20);
             add(fish);
@@ -44,10 +46,18 @@ package{
             debugDrawing.debugDrawSetup(_world, ratio, 1.0, 1, 0.5);
         }
 
+        public function spriteCollide(fish:B2FlxSprite,player:Player):void{
+            player.fill(0xFFFF0000);
+        }
+
+        public function spriteCollide2(floor:B2FlxTileblock,player:Player):void{
+        }
+
         override public function update():void{
             _world.Step(FlxG.elapsed, 10, 10);
             _world.DrawDebugData();
-            FlxG.collide();
+            FlxG.collide(fish,player,spriteCollide);
+            FlxG.collide(floor,player,spriteCollide2);
 
             dad.update();
 
