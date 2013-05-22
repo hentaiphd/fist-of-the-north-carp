@@ -19,6 +19,9 @@ package{
         public var sizeCounter:Number = 20;
         public var deadFish:FlxGroup = new FlxGroup();
 
+        public var _timeText:FlxText;
+        public var _timer:Number = 0;
+
         override public function create():void{
             setupWorld();
 
@@ -32,6 +35,9 @@ package{
             add(player);
 
             makeFish(20);
+
+            _timeText = new FlxText(0, FlxG.height/2, FlxG.width, "");
+            this.add(_timeText);
         }
 
         private function setupWorld():void{
@@ -55,11 +61,13 @@ package{
         public function spriteCollide(fish:B2FlxSprite,player:Player):void{
             if(player.isTouching(FlxObject.DOWN) && fish.isTouching(FlxObject.UP)){
                 deadFish.add(fish);
+                player.lastUnhookTime = _timer;
                 dad.hook(null);
                 sizeCounter += 2;
                 makeFish(sizeCounter);
-            } else {
+            } else if(_timer - player.lastUnhookTime > .5){
                 player.fill(0xFFFF0000);
+                FlxG.switchState(new EndgameState());
             }
         }
 
@@ -77,6 +85,9 @@ package{
             FlxG.collide(floor,player,spriteCollide2);
 
             dad.update();
+
+            _timer += FlxG.elapsed;
+            _timeText.text = _timer + "";
 
             super.update();
         }

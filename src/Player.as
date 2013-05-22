@@ -10,6 +10,7 @@ package{
         private var runSpeed:int = 5;
         private var _jumppower:int = 230;
         private var jumping:Boolean = false;
+        public var lastUnhookTime:Number = 0;
 
         public function Player(x:int, y:int){
             this.makeGraphic(x,y);
