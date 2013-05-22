@@ -4,10 +4,18 @@ package
 
     public class EndgameState extends FlxState
     {
+
+        public var score:Number;
+
+        public function EndgameState(_score:Number):void{
+            super();
+            score = _score;
+        }
+
         override public function create():void
         {
             var t:FlxText;
-            t = new FlxText(0,FlxG.height/2-10,FlxG.width,"you lose");
+            t = new FlxText(0,FlxG.height/2-10,FlxG.width,"you lose\nfish: " + score);
             t.size = 16;
             t.alignment = "center";
             add(t);

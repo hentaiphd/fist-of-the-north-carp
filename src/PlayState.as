@@ -25,6 +25,12 @@ package{
 
         public var _timeText:FlxText;
         public var _timer:Number = 0;
+        public var _gameEndTime:Number = 0;
+        public var _gameWillEnd:Boolean = false;
+
+        public var fishCounter:Number = 0;
+
+        public var zoomCam:ZoomCamera;
 
         override public function create():void{
             setupWorld();
@@ -50,6 +56,9 @@ package{
 
             _timeText = new FlxText(0, FlxG.height/2, FlxG.width, "");
             this.add(_timeText);
+
+            zoomCam = new ZoomCamera(0, 0, 640, 480);
+            FlxG.resetCameras(zoomCam);
         }
 
         private function setupWorld():void{
@@ -73,34 +82,45 @@ package{
         public function spriteCollide2(floor:B2FlxTileblock,player:Player):void{}
         public function deadFishCollide(dead:FlxSprite,player:Player):void{}
         public function spriteCollide(fish:B2FlxSprite,player:Player):void{
-            if(player.isTouching(FlxObject.DOWN) && fish.isTouching(FlxObject.UP)){
-                deadFish.add(fish);
-                player.lastUnhookTime = _timer;
-                dad.hook(null);
-                sizeCounter += 2;
-                makeFish(sizeCounter);
-            } else if(_timer - player.lastUnhookTime > .5){
-                player.fill(0xFFFF0000);
-                FlxG.switchState(new EndgameState());
+            if(_timer - player.lastUnhookTime > .5){
+                if(player.isTouching(FlxObject.DOWN) && fish.isTouching(FlxObject.UP)){
+                    deadFish.add(fish);
+                    player.lastUnhookTime = _timer;
+                    fishCounter += 1;
+                    dad.hook(null);
+                    sizeCounter += 2;
+                    makeFish(sizeCounter);
+                } else {
+                    player.fill(0xFFFF0000);
+                    zoomCam.target = player;
+                    zoomCam.targetZoom = 2;
+                    _gameWillEnd = true;
+                    _gameEndTime = _timer;
+                }
             }
         }
 
         override public function update():void{
-            _world.Step(FlxG.elapsed, 10, 10);
-            _world.DrawDebugData();
-
             FlxG.collide(fish,player,spriteCollide);
             FlxG.collide(deadFish,player,deadFishCollide);
             FlxG.collide(floor,player,spriteCollide2);
             FlxG.collide(leftWall,player,spriteCollide2);
             FlxG.collide(rightWall,player,spriteCollide2);
 
+            if(_timer - _gameEndTime > 2 && _gameWillEnd){
+                FlxG.switchState(new EndgameState(fishCounter));
+            }
+
             dad.update();
 
             _timer += FlxG.elapsed;
             _timeText.text = _timer + "";
 
-            super.update();
+            if(!_gameWillEnd){
+                _world.Step(FlxG.elapsed, 10, 10);
+                _world.DrawDebugData();
+                super.update();
+            }
         }
     }
 }
