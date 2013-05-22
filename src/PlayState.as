@@ -29,6 +29,17 @@ package{
             player = new Player(20,20);
             add(player);
 
+            makeFish();
+        }
+
+        private function setupWorld():void{
+            var gravity:b2Vec2 = new b2Vec2(0,9.8);
+            _world = new b2World(gravity,true);
+            var debugDrawing:DebugDraw = new DebugDraw();
+            debugDrawing.debugDrawSetup(_world, ratio, 1.0, 1, 0.5);
+        }
+
+        private function makeFish():void{
             var fixtureDef:b2FixtureDef = new b2FixtureDef();
             fixtureDef.density = .5;
 
@@ -39,15 +50,13 @@ package{
             dad.hook(fish);
         }
 
-        private function setupWorld():void{
-            var gravity:b2Vec2 = new b2Vec2(0,9.8);
-            _world = new b2World(gravity,true);
-            var debugDrawing:DebugDraw = new DebugDraw();
-            debugDrawing.debugDrawSetup(_world, ratio, 1.0, 1, 0.5);
-        }
-
         public function spriteCollide(fish:B2FlxSprite,player:Player):void{
-            player.fill(0xFFFF0000);
+            if(player.isTouching(FlxObject.DOWN) && fish.isTouching(FlxObject.UP)){
+                dad.hook(null);
+                makeFish();
+            } else {
+                player.fill(0xFFFF0000);
+            }
         }
 
         public function spriteCollide2(floor:B2FlxTileblock,player:Player):void{
