@@ -13,16 +13,19 @@ package{
         public var _world:b2World;
         private var ratio:Number = 30;
         public var dad:Dad;
+        public var player:Player;
 
         override public function create():void{
             setupWorld();
 
             var floor:B2FlxTileblock = new B2FlxTileblock(0, 400, 640, 80, _world);
             floor.createBody();
-            floor.makeGraphic(400,640);
+            floor.makeGraphic(480,640);
             add(floor);
 
             dad = new Dad(_world);
+            player = new Player(20,20);
+            add(player);
 
             var fixtureDef:b2FixtureDef = new b2FixtureDef();
             fixtureDef.density = .001;
@@ -44,6 +47,7 @@ package{
         override public function update():void{
             _world.Step(FlxG.elapsed, 10, 10);
             _world.DrawDebugData();
+            FlxG.collide();
 
             dad.update();
 
