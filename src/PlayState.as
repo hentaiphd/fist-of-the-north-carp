@@ -22,7 +22,7 @@ package{
 
             floor = new B2FlxTileblock(0, 400, 640, 80, _world);
             floor.createBody();
-            floor.makeGraphic(480,640);
+            floor.makeGraphic(640, 80);
             add(floor);
 
             dad = new Dad(_world);
@@ -30,7 +30,7 @@ package{
             add(player);
 
             var fixtureDef:b2FixtureDef = new b2FixtureDef();
-            fixtureDef.density = .001;
+            fixtureDef.density = 1;
 
             fish = new B2FlxSprite(320, 240, 20, 20, _world);
             fish.createBody(b2Body.b2_dynamicBody, null, fixtureDef);
