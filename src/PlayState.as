@@ -16,6 +16,8 @@ package{
         public var player:Player;
         public var floor:B2FlxTileblock;
         public var fish:B2FlxSprite;
+        public var sizeCounter:Number = 20;
+        public var deadFish:FlxGroup = new FlxGroup();
 
         override public function create():void{
             setupWorld();
@@ -29,7 +31,7 @@ package{
             player = new Player(20,20);
             add(player);
 
-            makeFish();
+            makeFish(20);
         }
 
         private function setupWorld():void{
@@ -39,21 +41,23 @@ package{
             debugDrawing.debugDrawSetup(_world, ratio, 1.0, 1, 0.5);
         }
 
-        private function makeFish():void{
+        private function makeFish(size:Number):void{
             var fixtureDef:b2FixtureDef = new b2FixtureDef();
-            fixtureDef.density = .5;
+            fixtureDef.density = size*.005;
 
-            fish = new B2FlxSprite(320, 240, 20, 20, _world);
+            fish = new B2FlxSprite(320, 240, size, size, _world);
             fish.createBody(b2Body.b2_dynamicBody, null, fixtureDef);
-            fish.makeGraphic(20, 20);
+            fish.makeGraphic(size, size);
             add(fish);
             dad.hook(fish);
         }
 
         public function spriteCollide(fish:B2FlxSprite,player:Player):void{
             if(player.isTouching(FlxObject.DOWN) && fish.isTouching(FlxObject.UP)){
+                deadFish.add(fish);
                 dad.hook(null);
-                makeFish();
+                sizeCounter += 2;
+                makeFish(sizeCounter);
             } else {
                 player.fill(0xFFFF0000);
             }
@@ -62,10 +66,14 @@ package{
         public function spriteCollide2(floor:B2FlxTileblock,player:Player):void{
         }
 
+        public function deadFishCollide(dead:FlxSprite,player:Player):void{
+        }
+
         override public function update():void{
             _world.Step(FlxG.elapsed, 10, 10);
             _world.DrawDebugData();
             FlxG.collide(fish,player,spriteCollide);
+            FlxG.collide(deadFish,player,deadFishCollide);
             FlxG.collide(floor,player,spriteCollide2);
 
             dad.update();
