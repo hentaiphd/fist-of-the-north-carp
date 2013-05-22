@@ -14,7 +14,11 @@ package{
         private var ratio:Number = 30;
         public var dad:Dad;
         public var player:Player;
+
         public var floor:B2FlxTileblock;
+        public var leftWall:B2FlxTileblock;
+        public var rightWall:B2FlxTileblock;
+
         public var fish:B2FlxSprite;
         public var sizeCounter:Number = 20;
         public var deadFish:FlxGroup = new FlxGroup();
@@ -29,6 +33,14 @@ package{
             floor.createBody();
             floor.makeGraphic(640, 80);
             add(floor);
+
+            leftWall = new B2FlxTileblock(0, 0, 5, 480, _world);
+            leftWall.createBody();
+            add(leftWall);
+
+            rightWall = new B2FlxTileblock(635, 0, 5, 480, _world);
+            rightWall.createBody();
+            add(rightWall);
 
             dad = new Dad(_world);
             player = new Player(20,20);
@@ -80,9 +92,12 @@ package{
         override public function update():void{
             _world.Step(FlxG.elapsed, 10, 10);
             _world.DrawDebugData();
+
             FlxG.collide(fish,player,spriteCollide);
             FlxG.collide(deadFish,player,deadFishCollide);
             FlxG.collide(floor,player,spriteCollide2);
+            FlxG.collide(leftWall,player,spriteCollide2);
+            FlxG.collide(rightWall,player,spriteCollide2);
 
             dad.update();
 

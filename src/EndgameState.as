@@ -11,7 +11,7 @@ package
             t.size = 16;
             t.alignment = "center";
             add(t);
-            t = new FlxText(FlxG.width/2-50,FlxG.height-20,100,"UP to retry");
+            t = new FlxText(FlxG.width/2-50,FlxG.height-20,100,"DOWN to retry");
             t.alignment = "center";
             add(t);
 
@@ -22,7 +22,7 @@ package
         {
             super.update();
 
-            if(FlxG.keys.UP)
+            if(FlxG.keys.DOWN)
             {
                 FlxG.mouse.hide();
                 FlxG.switchState(new PlayState());
