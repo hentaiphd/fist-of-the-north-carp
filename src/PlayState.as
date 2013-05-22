@@ -8,7 +8,7 @@ package{
 
 
     public class PlayState extends FlxState{
-        [Embed(source="../assets/tiles.png")] private var ImgCube:Class;
+        [Embed(source="../assets/bg.png")] private var ImgBG:Class;
 
         public var _world:b2World;
         private var ratio:Number = 30;
@@ -35,10 +35,11 @@ package{
         override public function create():void{
             setupWorld();
 
+            var bg:FlxSprite = new FlxSprite(0, 0, ImgBG);
+            add(bg);
+
             floor = new B2FlxTileblock(0, 400, 640, 80, _world);
             floor.createBody();
-            floor.makeGraphic(640, 80);
-            add(floor);
 
             leftWall = new B2FlxTileblock(0, 0, 5, 480, _world);
             leftWall.createBody();
@@ -75,6 +76,7 @@ package{
             fish = new B2FlxSprite(320, 240, size, size, _world);
             fish.createBody(b2Body.b2_dynamicBody, null, fixtureDef);
             fish.makeGraphic(size, size);
+            fish.fill(0xFF0000FF);
             add(fish);
             dad.hook(fish);
         }

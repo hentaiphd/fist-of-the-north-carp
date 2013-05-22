@@ -52,17 +52,15 @@ package{
 
         private function setupRod():void{
             jointBase = new B2FlxSprite(320, 100, 1, 1, _world);
-            jointBase.angle = 30;
             jointBase.createBody(b2Body.b2_staticBody,null, null, RODBITS);
-            jointBase.makeGraphic(5, 5);
 
             rod = new B2FlxSprite(jointBase.x, jointBase.y-100, 3, 100, _world);
             rod.angle = 210;
             rod.createBody(b2Body.b2_dynamicBody, null, null, RODBITS);
             rod._obj.SetAngle(2.9*Math.PI);
             rod.makeGraphic(3, 100);
+            rod.fill(0xFF7E4F26);
 
-            FlxG.state.add(jointBase);
             FlxG.state.add(rod);
 
             var revJointDef:b2RevoluteJointDef = new b2RevoluteJointDef();
@@ -99,6 +97,7 @@ package{
                     _link.createBody(b2Body.b2_dynamicBody,bodyDef,fixtureDef);
                     _link.makeGraphic(2, chainLength+10);
                     FlxG.state.add(_link);
+                    _link.fill(0xFF737373);
                     link = _link._obj;
                     revoluteJoint(rod._obj,link,new b2Vec2(0,50/ratio),new b2Vec2(0,-chainLength/ratio));
                 }
@@ -106,6 +105,7 @@ package{
                     var _newLink:B2FlxSprite = new B2FlxSprite(320, 240, 2, chainLength, _world);
                     _newLink.createBody(b2Body.b2_dynamicBody,bodyDef,fixtureDef);
                     _newLink.makeGraphic(2, chainLength+10);
+                    _newLink.fill(0xFF737373);
                     FlxG.state.add(_newLink);
                     var newLink:b2Body=_newLink._obj;
                     revoluteJoint(link,newLink,new b2Vec2(0,chainLength/ratio),new b2Vec2(0,-chainLength/ratio));
