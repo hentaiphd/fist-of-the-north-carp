@@ -7,7 +7,7 @@ package{
     import Box2D.Dynamics.Joints.*;
 
     public class Player extends FlxSprite{
-        private var runSpeed:int = 80;
+        private var runSpeed:int = 5;
         private var _jumppower:int = 230;
         private var jumping:Boolean = false;
 
@@ -25,9 +25,9 @@ package{
             acceleration.y = 400;
 
             if(FlxG.keys.LEFT) {
-                acceleration.x -= drag.x;
+                x -= runSpeed;
             } else if(FlxG.keys.RIGHT){
-                acceleration.x += drag.x;
+                x += runSpeed;
             }
 
             if(this.isTouching(FlxObject.FLOOR)){
@@ -36,7 +36,7 @@ package{
 
             if((FlxG.keys.justPressed("SPACE") || FlxG.keys.justPressed("UP")) && jumping == false){
                 jumping = true;
-                velocity.y =-_jumppower;
+                velocity.y = -_jumppower;
             }
         }
 

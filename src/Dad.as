@@ -70,7 +70,7 @@ package{
                 new b2Vec2(jointBase._obj.GetWorldCenter().x,
                            jointBase._obj.GetWorldCenter().y));
             revJointDef.enableMotor = true;
-            revJointDef.motorSpeed = -30;
+            revJointDef.motorSpeed = -15;
             revJointDef.lowerAngle = -0.5 * Math.PI;
             revJointDef.upperAngle = 0.5 * Math.PI;
             revJointDef.enableLimit = true;
@@ -92,7 +92,7 @@ package{
             var bodyDef:b2BodyDef = new b2BodyDef();
             bodyDef.type=b2Body.b2_dynamicBody;
 
-            for (var i:Number = 0; i <= 26; i++) {
+            for (var i:Number = 0; i <= 30; i++) {
                 bodyDef.position.Set(320/ratio,(chainLength+2*chainLength*i)/ratio);
                 if (i==0) {
                     var _link:B2FlxSprite = new B2FlxSprite(320, 240, 2, chainLength, _world);
