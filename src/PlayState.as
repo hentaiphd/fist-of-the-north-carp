@@ -28,6 +28,7 @@ package{
         public var _timer:Number = 0;
         public var _gameEndTime:Number = 0;
         public var _gameWillEnd:Boolean = false;
+        public var _endgameActive:Boolean = false;
 
         public var fishCounter:Number = 0;
 
@@ -52,12 +53,13 @@ package{
 
             dad = new Dad(_world);
             player = new Player(20,20);
+            player.fill(0xFF0000FF);
             add(player);
 
             makeFish(20);
 
             _timeText = new FlxText(0, FlxG.height/2, FlxG.width, "");
-            this.add(_timeText);
+            //this.add(_timeText);
 
             zoomCam = new ZoomCamera(0, 0, 640, 480);
             FlxG.resetCameras(zoomCam);
@@ -74,7 +76,7 @@ package{
             var fixtureDef:b2FixtureDef = new b2FixtureDef();
             fixtureDef.density = 20*.005;
 
-            fish = new B2FlxSprite(320, 240, 48, 23, _world);
+            fish = new B2FlxSprite(320, 240, 48, 24, _world);
             fish.createBody(b2Body.b2_dynamicBody, null, fixtureDef);
             fish.loadGraphic(ImgFish);
             add(fish);
@@ -102,6 +104,22 @@ package{
             }
         }
 
+        public function showEndgame():void{
+            var t:FlxText;
+            t = new FlxText(0,FlxG.height/2-90,FlxG.width,"you lose\nfish: " + fishCounter);
+            t.size = 26;
+            t.scrollFactor = new FlxPoint(0, 0);
+            t.alignment = "center";
+            t.color = 0xFF0000FF;
+            add(t);
+            t = new FlxText(0,FlxG.height/2-10,FlxG.width,"DOWN to retry");
+            t.alignment = "center";
+            t.color = 0xFF0000FF;
+            t.size = 16;
+            t.scrollFactor = new FlxPoint(0, 0);
+            add(t);
+        }
+
         override public function update():void{
             FlxG.collide(fish,player,spriteCollide);
             FlxG.collide(deadFish,player,deadFishCollide);
@@ -110,7 +128,8 @@ package{
             FlxG.collide(rightWall,player,spriteCollide2);
 
             if(_timer - _gameEndTime > 1 && _gameWillEnd){
-                FlxG.switchState(new EndgameState(fishCounter));
+                _endgameActive = true;
+                showEndgame();
             }
 
             dad.update();
@@ -122,6 +141,12 @@ package{
                 _world.Step(FlxG.elapsed, 10, 10);
                 _world.DrawDebugData();
                 super.update();
+            }
+
+            if(_endgameActive){
+                if(FlxG.keys.DOWN){
+                    FlxG.switchState(new PlayState());
+                }
             }
         }
     }
