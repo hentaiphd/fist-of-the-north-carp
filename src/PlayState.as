@@ -9,7 +9,13 @@ package{
 
     public class PlayState extends FlxState{
         [Embed(source="../assets/bg.png")] private var ImgBG:Class;
-        [Embed(source="../assets/fish.png")] private var ImgFish:Class;
+        [Embed(source="../assets/fish_1.png")] private var ImgFish1:Class;
+        [Embed(source="../assets/fish_2.png")] private var ImgFish2:Class;
+        [Embed(source="../assets/fish_3.png")] private var ImgFish3:Class;
+        [Embed(source="../assets/fish_4.png")] private var ImgFish4:Class;
+        [Embed(source="../assets/fish_5.png")] private var ImgFish5:Class;
+        [Embed(source="../assets/fish_6.png")] private var ImgFish6:Class;
+        [Embed(source="../assets/fish_7.png")] private var ImgFish7:Class;
 
         public var _world:b2World;
         private var ratio:Number = 30;
@@ -77,9 +83,27 @@ package{
             var fixtureDef:b2FixtureDef = new b2FixtureDef();
             fixtureDef.density = 20*.005;
 
+            var pick:Number = FlxG.random()*7;
+            var graphic:Class;
+            if(pick > 6){
+                graphic = ImgFish1;
+            } else if(pick > 5){
+                graphic = ImgFish2;
+            } else if(pick > 4){
+                graphic = ImgFish3;
+            } else if(pick > 3){
+                graphic = ImgFish4;
+            } else if(pick > 2){
+                graphic = ImgFish5;
+            } else if(pick > 1){
+                graphic = ImgFish6;
+            } else {
+                graphic = ImgFish7;
+            }
+
             fish = new B2FlxSprite(320, 240, 48, 24, _world);
             fish.createBody(b2Body.b2_dynamicBody, null, fixtureDef);
-            fish.loadGraphic(ImgFish);
+            fish.loadGraphic(graphic);
             add(fish);
             dad.hook(fish);
         }
@@ -98,7 +122,7 @@ package{
                 } else {
                     player.fill(0xFFFF0000);
                     zoomCam.target = player;
-                    zoomCam.targetZoom = 2;
+                    zoomCam.targetZoom = 2.5;
                     _gameWillEnd = true;
                     _gameEndTime = _timer;
                 }
@@ -113,13 +137,13 @@ package{
 
             var t:FlxText;
             t = new FlxText(0,FlxG.height/2-90,FlxG.width,"got fishslapped\nhelped dad\nwith " + fishCounter + " fish");
-            t.size = 26;
+            t.size = 18;
             t.scrollFactor = new FlxPoint(0, 0);
             t.alignment = "center";
             add(t);
             t = new FlxText(0,FlxG.height/2+40,FlxG.width,"DOWN to retry");
             t.alignment = "center";
-            t.size = 16;
+            t.size = 10;
             t.scrollFactor = new FlxPoint(0, 0);
             add(t);
         }
