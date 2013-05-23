@@ -38,7 +38,7 @@ package{
             var bg:FlxSprite = new FlxSprite(0, 0, ImgBG);
             add(bg);
 
-            floor = new B2FlxTileblock(0, 400, 640, 80, _world);
+            floor = new B2FlxTileblock(0, 430, 640, 50, _world);
             floor.createBody();
 
             leftWall = new B2FlxTileblock(0, 0, 5, 480, _world);
@@ -109,7 +109,7 @@ package{
             FlxG.collide(leftWall,player,spriteCollide2);
             FlxG.collide(rightWall,player,spriteCollide2);
 
-            if(_timer - _gameEndTime > 2 && _gameWillEnd){
+            if(_timer - _gameEndTime > 1 && _gameWillEnd){
                 FlxG.switchState(new EndgameState(fishCounter));
             }
 

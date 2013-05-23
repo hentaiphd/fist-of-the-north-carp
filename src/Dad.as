@@ -51,7 +51,7 @@ package{
         }
 
         private function setupRod():void{
-            jointBase = new B2FlxSprite(320, 100, 1, 1, _world);
+            jointBase = new B2FlxSprite(320, 130, 1, 1, _world);
             jointBase.createBody(b2Body.b2_staticBody,null, null, RODBITS);
 
             rod = new B2FlxSprite(jointBase.x, jointBase.y-100, 3, 100, _world);
