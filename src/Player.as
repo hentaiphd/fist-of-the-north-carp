@@ -13,6 +13,7 @@ package{
         public var lastUnhookTime:Number = 0;
 
         public function Player(x:int, y:int){
+            super(20, 340);
             this.makeGraphic(x,y);
 
             drag.x = runSpeed*8;

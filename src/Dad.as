@@ -86,7 +86,7 @@ package{
                            jointBase._obj.GetWorldCenter().y));
             revJointDef.enableMotor = true;
             revJointDef.motorSpeed = -15;
-            revJointDef.lowerAngle = -0.5 * Math.PI;
+            revJointDef.lowerAngle = -0.4 * Math.PI;
             revJointDef.upperAngle = 0.5 * Math.PI;
             revJointDef.enableLimit = true;
             revJointDef.maxMotorTorque = 100;
