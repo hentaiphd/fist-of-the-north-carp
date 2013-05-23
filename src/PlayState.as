@@ -106,7 +106,7 @@ package{
 
         public function showEndgame():void{
             var t:FlxText;
-            t = new FlxText(0,FlxG.height/2-90,FlxG.width,"you lose\nfish: " + fishCounter);
+            t = new FlxText(0,FlxG.height/2-90,FlxG.width,"got fishslapped\nfish: " + fishCounter);
             t.size = 26;
             t.scrollFactor = new FlxPoint(0, 0);
             t.alignment = "center";
