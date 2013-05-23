@@ -87,7 +87,7 @@ package{
         public function spriteCollide2(floor:B2FlxTileblock,player:Player):void{}
         public function deadFishCollide(dead:FlxSprite,player:Player):void{}
         public function spriteCollide(fish:B2FlxSprite,player:Player):void{
-            if(_timer - player.lastUnhookTime > .5){
+            if(_timer - player.lastUnhookTime > .3){
                 if(player.isTouching(FlxObject.DOWN) && fish.isTouching(FlxObject.UP)){
                     deadFish.add(fish);
                     player.lastUnhookTime = _timer;
@@ -116,11 +116,11 @@ package{
             t.size = 26;
             t.scrollFactor = new FlxPoint(0, 0);
             t.alignment = "center";
-            t.color = 0xff109cee;
+            t.color = 0xff084E77;
             add(t);
             t = new FlxText(0,FlxG.height/2+40,FlxG.width,"DOWN to retry");
             t.alignment = "center";
-            t.color = 0xff109cee;
+            t.color = 0xff084E77;
             t.size = 16;
             t.scrollFactor = new FlxPoint(0, 0);
             add(t);
