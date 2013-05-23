@@ -72,9 +72,9 @@ package{
 
         private function makeFish(size:Number):void{
             var fixtureDef:b2FixtureDef = new b2FixtureDef();
-            fixtureDef.density = size*.005;
+            fixtureDef.density = 20*.005;
 
-            fish = new B2FlxSprite(320, 240, size, size, _world);
+            fish = new B2FlxSprite(320, 240, 48, 23, _world);
             fish.createBody(b2Body.b2_dynamicBody, null, fixtureDef);
             fish.loadGraphic(ImgFish);
             add(fish);
