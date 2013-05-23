@@ -9,6 +9,7 @@ package{
 
     public class PlayState extends FlxState{
         [Embed(source="../assets/bg.png")] private var ImgBG:Class;
+        [Embed(source="../assets/fish.png")] private var ImgFish:Class;
 
         public var _world:b2World;
         private var ratio:Number = 30;
@@ -75,8 +76,7 @@ package{
 
             fish = new B2FlxSprite(320, 240, size, size, _world);
             fish.createBody(b2Body.b2_dynamicBody, null, fixtureDef);
-            fish.makeGraphic(size, size);
-            fish.fill(0xFF0000FF);
+            fish.loadGraphic(ImgFish);
             add(fish);
             dad.hook(fish);
         }
