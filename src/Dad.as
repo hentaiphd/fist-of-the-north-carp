@@ -23,9 +23,10 @@ package{
 
         public function Dad(x:Number, y:Number, _world:b2World){
             dadSprite = new FlxSprite(x, y);
-            dadSprite.loadGraphic(ImgDad, true, true, 64, 140, true);
-            dadSprite.addAnimation("leanback", [0]);
+            dadSprite.loadGraphic(ImgDad, true, true, 68, 140, true);
+            dadSprite.addAnimation("leanback", [2]);
             dadSprite.addAnimation("stand", [1]);
+            dadSprite.addAnimation("leanfwd", [0]);
             FlxG.state.add(dadSprite);
 
             this._world = _world;
@@ -44,10 +45,10 @@ package{
             var range:Number = rodJoint.GetUpperLimit() - rodJoint.GetLowerLimit();
             if(angle > rodJoint.GetLowerLimit() + 3*(range/4)){
                 dadSprite.play("leanback");
-            } else if(angle > rodJoint.GetLowerLimit() + (range/3)){
+            } else if(angle > rodJoint.GetLowerLimit() + (range/4)){
                 dadSprite.play("stand");
             } else if(angle > rodJoint.GetLowerLimit()){
-                dadSprite.play("stand");
+                dadSprite.play("leanfwd");
             }
 
             if(angle <= rodJoint.GetLowerLimit() ||

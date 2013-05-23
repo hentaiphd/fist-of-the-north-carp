@@ -106,16 +106,21 @@ package{
         }
 
         public function showEndgame():void{
+            var op:FlxSprite = new FlxSprite(0, 0);
+            op.makeGraphic(640, 480);
+            op.fill(0x55000000);
+            add(op);
+
             var t:FlxText;
             t = new FlxText(0,FlxG.height/2-90,FlxG.width,"got fishslapped\nfish: " + fishCounter);
             t.size = 26;
             t.scrollFactor = new FlxPoint(0, 0);
             t.alignment = "center";
-            t.color = 0xFF0000FF;
+            t.color = 0xff109cee;
             add(t);
             t = new FlxText(0,FlxG.height/2-10,FlxG.width,"DOWN to retry");
             t.alignment = "center";
-            t.color = 0xFF0000FF;
+            t.color = 0xff109cee;
             t.size = 16;
             t.scrollFactor = new FlxPoint(0, 0);
             add(t);
@@ -128,7 +133,7 @@ package{
             FlxG.collide(leftWall,player,spriteCollide2);
             FlxG.collide(rightWall,player,spriteCollide2);
 
-            if(_timer - _gameEndTime > 1 && _gameWillEnd){
+            if(_timer - _gameEndTime > 1 && _gameWillEnd && !_endgameActive){
                 _endgameActive = true;
                 showEndgame();
             }
