@@ -21,7 +21,7 @@ package
             var logo:FlxSprite = new FlxSprite(90, 100, ImgLogo);
             add(logo);
 
-            t = new FlxText(0,FlxG.height-40,FlxG.width,"DOWN to play");
+            t = new FlxText(0,FlxG.height-40,FlxG.width,"DOWN to play, UP to instructions");
             t.alignment = "center";
             t.size = 20;
             t.color = 0xff109cee;
@@ -35,6 +35,8 @@ package
 
             if(FlxG.keys.DOWN){
                 FlxG.switchState(new PlayState());
+            } else if(FlxG.keys.UP){
+                FlxG.switchState(new HowState());
             }
         }
     }
