@@ -6,7 +6,9 @@ package{
     import Box2D.Common.Math.*;
     import Box2D.Dynamics.Joints.*;
 
-    public class Dad extends FlxSprite{
+    public class Dad{
+        [Embed(source="../assets/dad_sprites.png")] private var ImgDad:Class;
+
         public var _world:b2World;
         private var ratio:Number = 30;
         private var rod:B2FlxSprite;
@@ -14,11 +16,18 @@ package{
         private var rodJoint:b2RevoluteJoint;
         private var hookJoint:b2RevoluteJoint;
         private var link:b2Body;
+        private var dadSprite:FlxSprite;
 
         public static const RODBITS:Number = 1;
         public static const LINEBITS:Number = 2;
 
-        public function Dad(_world:b2World){
+        public function Dad(x:Number, y:Number, _world:b2World){
+            dadSprite = new FlxSprite(x, y);
+            dadSprite.loadGraphic(ImgDad, true, true, 64, 140, true);
+            dadSprite.addAnimation("leanback", [0]);
+            dadSprite.addAnimation("stand", [1]);
+            FlxG.state.add(dadSprite);
+
             this._world = _world;
 
             setupRod();
@@ -29,15 +38,22 @@ package{
             rodJoint.SetMotorSpeed(speed);
         }
 
-        override public function update():void{
+        public function update():void{
             var speed:Number = rodJoint.GetMotorSpeed();
             var angle:Number = rodJoint.GetJointAngle();
+            var range:Number = rodJoint.GetUpperLimit() - rodJoint.GetLowerLimit();
+            if(angle > rodJoint.GetLowerLimit() + 3*(range/4)){
+                dadSprite.play("leanback");
+            } else if(angle > rodJoint.GetLowerLimit() + (range/3)){
+                dadSprite.play("stand");
+            } else if(angle > rodJoint.GetLowerLimit()){
+                dadSprite.play("stand");
+            }
+
             if(angle <= rodJoint.GetLowerLimit() ||
                angle >= rodJoint.GetUpperLimit()){
                 rodJoint.SetMotorSpeed(speed*-1);
             }
-
-            super.update();
         }
 
         public function hook(fish:B2FlxSprite):void{

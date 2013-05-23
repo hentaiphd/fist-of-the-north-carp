@@ -12,7 +12,7 @@ package
             add(bg);
 
             var t:FlxText;
-            t = new FlxText(0,FlxG.height/2+40,FlxG.width,"(fist of the north carp)\n\nNina Freeman\nEmmett Butler\n#fishingjam");
+            t = new FlxText(0,FlxG.height/2+40,FlxG.width,"(fist of the north carp)");
             t.size = 22;
             t.color = 0xff109cee;
             t.alignment = "center";

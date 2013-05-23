@@ -51,7 +51,8 @@ package{
             rightWall.createBody();
             add(rightWall);
 
-            dad = new Dad(_world);
+            dad = new Dad(270, 110, _world);
+
             player = new Player(20,20);
             player.fill(0xFF0000FF);
             add(player);
