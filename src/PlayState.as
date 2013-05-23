@@ -112,13 +112,13 @@ package{
             add(op);
 
             var t:FlxText;
-            t = new FlxText(0,FlxG.height/2-90,FlxG.width,"got fishslapped\nfish: " + fishCounter);
+            t = new FlxText(0,FlxG.height/2-90,FlxG.width,"got fishslapped\nhelped dad\nwith " + fishCounter + " fish");
             t.size = 26;
             t.scrollFactor = new FlxPoint(0, 0);
             t.alignment = "center";
             t.color = 0xff109cee;
             add(t);
-            t = new FlxText(0,FlxG.height/2-10,FlxG.width,"DOWN to retry");
+            t = new FlxText(0,FlxG.height/2+40,FlxG.width,"DOWN to retry");
             t.alignment = "center";
             t.color = 0xff109cee;
             t.size = 16;
