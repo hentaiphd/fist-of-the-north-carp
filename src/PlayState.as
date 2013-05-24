@@ -120,7 +120,7 @@ package{
                     sizeCounter += 2;
                     makeFish(sizeCounter);
                 } else {
-                    player.fill(0xFFFF0000);
+                    player.fishSlap();
                     zoomCam.target = player;
                     zoomCam.targetZoom = 2.5;
                     _gameWillEnd = true;
