@@ -28,6 +28,10 @@ package{
             addAnimation("falling", [6]);
             addAnimation("fishslap", [1,2]);
 
+            frameWidth = 48;
+            frameHeight = 80;
+            width = 30
+
             drag.x = runSpeed*8;
             drag.y = runSpeed*3;
 
