@@ -8,26 +8,30 @@ package{
 
     public class Player extends FlxSprite{
 
-        [Embed(source="../assets/x.png")] private var ImgPlayer:Class;
+        [Embed(source="../assets/girl_sprites.png")] private var ImgPlayer:Class;
 
         private var runSpeed:int = 5;
         private var _jumppower:int = 290;
         private var jumping:Boolean = false;
+        private var running:Boolean = false;
         public var lastUnhookTime:Number = 0;
 
         public function Player(x:int, y:int){
             super(20, 340);
-            this.makeGraphic(x,y);
-            loadGraphic(ImgPlayer, true, true, 68, 140, true);
-            addAnimation("standing", [1]);
-            addAnimation("running", [1,2,3,4]);
-            addAnimation("crouching", [1]);
-            addAnimation("jumping", [1]);
-            addAnimation("falling", [1]);
-            addAnimation("fishslap", [1,2,3]);
+
+            loadGraphic(ImgPlayer, true, true, 48, 80, true);
+            addAnimation("standing", [11]);
+            addAnimation("running", [7,8,9,10]);
+            addAnimation("crouching", [3]);
+            addAnimation("jumping", [4]);
+            addAnimation("apex", [5]);
+            addAnimation("falling", [6]);
+            addAnimation("fishslap", [1,2]);
 
             drag.x = runSpeed*8;
             drag.y = runSpeed*3;
+
+            play("standing");
         }
 
         override public function update():void{
@@ -39,11 +43,19 @@ package{
             if(FlxG.keys.LEFT) {
                 facing = LEFT;
                 x -= runSpeed;
-                play("running");
+                if(!running){
+                    running = true;
+                    play("running");
+                }
             } else if(FlxG.keys.RIGHT){
                 facing = RIGHT;
                 x += runSpeed;
-                play("running");
+                if(!running){
+                    running = true;
+                    play("running");
+                }
+            } else {
+                play("standing");
             }
 
             if(this.isTouching(FlxObject.FLOOR)){
@@ -61,10 +73,10 @@ package{
             }
 
             if(jumping == true){
-                if(velocity > 0){
+                if(velocity.y < 0){
                     play("jumping");
                 }
-                if(velocity < 0){
+                if(velocity.y > 0){
                     play("falling");
                 }
             }

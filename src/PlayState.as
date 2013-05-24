@@ -60,7 +60,6 @@ package{
             dad = new Dad(270, 110, _world);
 
             player = new Player(20,20);
-            player.fill(0xFF0000FF);
             add(player);
 
             makeFish(20);

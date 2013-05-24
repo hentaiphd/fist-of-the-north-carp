@@ -73,8 +73,8 @@ package
         {
 
             // target position in screen space
-            var targetScreenX:Number = target.x - scroll.x;
-            var targetScreenY:Number = target.y - scroll.y;
+            var targetScreenX:Number = target.x + target.width/2 - scroll.x;
+            var targetScreenY:Number = target.y + target.height/2- scroll.y;
 
             // center on the target, until the camera bumps up to its bounds
             // then gradually favor the edge of the screen based on zoomMargin
