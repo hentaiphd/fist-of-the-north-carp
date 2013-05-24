@@ -4,11 +4,18 @@ package
 
     public class HowState extends FlxState{
         [Embed(source="../assets/bg.png")] private var ImgBG:Class;
+        [Embed(source="../assets/ripple.png")] private var ImgRipple:Class;
 
         override public function create():void{
 
             var bg:FlxSprite = new FlxSprite(0, 0, ImgBG);
             add(bg);
+
+            var ripple:FlxSprite = new FlxSprite(120, 214);
+            ripple.loadGraphic(ImgRipple, true, true, 338, 28, true);
+            ripple.addAnimation("rippling", [0, 1], .8);
+            add(ripple);
+            ripple.play("rippling");
 
             var t:FlxText = new FlxText(0,30,FlxG.width,"DOWN to play");
             t.alignment = "center";

@@ -16,6 +16,12 @@ package{
         [Embed(source="../assets/fish_5.png")] private var ImgFish5:Class;
         [Embed(source="../assets/fish_6.png")] private var ImgFish6:Class;
         [Embed(source="../assets/fish_7.png")] private var ImgFish7:Class;
+        [Embed(source="../assets/fish_8.png")] private var ImgFish8:Class;
+        [Embed(source="../assets/fish_9.png")] private var ImgFish9:Class;
+        [Embed(source="../assets/fish_10.png")] private var ImgFish10:Class;
+        [Embed(source="../assets/fish_11.png")] private var ImgFish11:Class;
+        [Embed(source="../assets/fish_12.png")] private var ImgFish12:Class;
+        [Embed(source="../assets/ripple.png")] private var ImgRipple:Class;
 
         public var _world:b2World;
         private var ratio:Number = 30;
@@ -57,6 +63,12 @@ package{
             rightWall.createBody();
             add(rightWall);
 
+            var ripple:FlxSprite = new FlxSprite(120, 214);
+            ripple.loadGraphic(ImgRipple, true, true, 338, 28, true);
+            ripple.addAnimation("rippling", [0, 1], .8);
+            add(ripple);
+            ripple.play("rippling");
+
             dad = new Dad(270, 110, _world);
 
             player = new Player(20,20);
@@ -82,22 +94,32 @@ package{
             var fixtureDef:b2FixtureDef = new b2FixtureDef();
             fixtureDef.density = 20*.005;
 
-            var pick:Number = FlxG.random()*7;
+            var pick:Number = FlxG.random()*12;
             var graphic:Class;
-            if(pick > 6){
-                graphic = ImgFish1;
+            if(pick > 11){
+                graphic = ImgFish12;
+            } else if(pick > 10){
+                graphic = ImgFish11;
+            } else if(pick > 9){
+                graphic = ImgFish10;
+            } else if(pick > 8){
+                graphic = ImgFish9;
+            } else if(pick > 7){
+                graphic = ImgFish8;
+            } else if(pick > 6){
+                graphic = ImgFish7;
             } else if(pick > 5){
-                graphic = ImgFish2;
+                graphic = ImgFish6;
             } else if(pick > 4){
-                graphic = ImgFish3;
+                graphic = ImgFish5;
             } else if(pick > 3){
                 graphic = ImgFish4;
             } else if(pick > 2){
-                graphic = ImgFish5;
+                graphic = ImgFish3;
             } else if(pick > 1){
-                graphic = ImgFish6;
+                graphic = ImgFish2;
             } else {
-                graphic = ImgFish7;
+                graphic = ImgFish1;
             }
 
             fish = new B2FlxSprite(320, 240, 48, 24, _world);

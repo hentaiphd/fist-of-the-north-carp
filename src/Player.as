@@ -56,6 +56,7 @@ package{
                 }
             } else {
                 play("standing");
+                running = false;
             }
 
             if(this.isTouching(FlxObject.FLOOR)){
