@@ -63,15 +63,12 @@ package{
             if((FlxG.keys.SPACE || FlxG.keys.UP)){
                 if(!jumping){
                     play("crouching");
+                    FlxG.play(sfxJump);
                     jumping = true;
                     velocity.y -= _jumppower;
                 } else {
                     velocity.y -= 10;
                 }
-            }
-
-            if(FlxG.keys.justPressed("UP") || FlxG.keys.justPressed("SPACE")){
-                FlxG.play(sfxJump);
             }
 
             if(jumping == true){
