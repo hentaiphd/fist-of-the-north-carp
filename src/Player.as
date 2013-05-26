@@ -7,7 +7,7 @@ package{
     import Box2D.Dynamics.Joints.*;
 
     public class Player extends FlxSprite{
-
+        [Embed(source = "../assets/jump.mp3")] private var sfxJump:Class;
         [Embed(source="../assets/girl_sprites.png")] private var ImgPlayer:Class;
 
         private var runSpeed:int = 5;
@@ -75,6 +75,10 @@ package{
                 } else {
                     velocity.y -= 10;
                 }
+            }
+
+            if(FlxG.keys.justPressed("UP") || FlxG.keys.justPressed("SPACE")){
+                FlxG.play(sfxJump);
             }
 
             if(jumping == true){

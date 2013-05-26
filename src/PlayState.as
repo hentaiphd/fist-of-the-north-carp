@@ -8,6 +8,9 @@ package{
 
 
     public class PlayState extends FlxState{
+        [Embed(source = "../assets/fishslap1.mp3")] private var sfxFishslap:Class;
+        [Embed(source = "../assets/getfish.mp3")] private var sfxFishscore:Class;
+        [Embed(source = "../assets/startgame.mp3")] private var sfxStart:Class;
         [Embed(source="../assets/bg.png")] private var ImgBG:Class;
         [Embed(source="../assets/fish_1.png")] private var ImgFish1:Class;
         [Embed(source="../assets/fish_2.png")] private var ImgFish2:Class;
@@ -51,6 +54,7 @@ package{
 
             var bg:FlxSprite = new FlxSprite(0, 0, ImgBG);
             add(bg);
+            FlxG.play(sfxStart);
 
             floor = new B2FlxTileblock(0, 430, 640, 50, _world);
             floor.createBody();
@@ -135,6 +139,7 @@ package{
             if(_timer - player.lastUnhookTime > .3){
                 if(player.isTouching(FlxObject.DOWN) && fish.isTouching(FlxObject.UP)){
                     deadFish.add(fish);
+                    FlxG.play(sfxFishscore);
                     player.lastUnhookTime = _timer;
                     fishCounter += 1;
                     dad.hook(null);
@@ -142,6 +147,7 @@ package{
                     makeFish(sizeCounter);
                 } else {
                     player.fishSlap();
+                    FlxG.play(sfxFishslap);
                     zoomCam.target = player;
                     zoomCam.targetZoom = 2.5;
                     _gameWillEnd = true;
