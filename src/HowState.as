@@ -6,6 +6,11 @@ package
         [Embed(source="../assets/bg.png")] private var ImgBG:Class;
         [Embed(source="../assets/ripple.png")] private var ImgRipple:Class;
 
+        public var player:Player;
+        public var leftWall:B2FlxTileblock;
+        public var rightWall:B2FlxTileblock;
+        public var floor:B2FlxTileblock;
+
         override public function create():void{
 
             var bg:FlxSprite = new FlxSprite(0, 0, ImgBG);
@@ -24,22 +29,38 @@ package
             t.text = "FISHING WITH DAD\n\nArrow keys run and jump\nHelp dad by pulling his fish off the line.\nJump on top of fish to remove\nDad's a goofball...\nso don't get fishslapped";
             add(t);
 
-            t = new FlxText(0,FlxG.height-40,FlxG.width,"DOWN to play, UP to menu");
+            t = new FlxText(0,FlxG.height-40,FlxG.width,"DOWN to play");
             t.alignment = "center";
             t.size = 20;
             t.color = 0xff109cee;
             add(t);
 
+            floor = new B2FlxTileblock(0, 430, 640, 50, null);
+            add(floor);
+
+            leftWall = new B2FlxTileblock(0, 0, 5, 480, null);
+            add(leftWall);
+
+            rightWall = new B2FlxTileblock(635, 0, 5, 480, null);
+            add(rightWall);
+
+            player = new Player(20,20);
+            add(player);
+
             FlxG.mouse.hide();
         }
+
+        public function spriteCollide2(floor:B2FlxTileblock,player:Player):void{}
 
         override public function update():void{
             super.update();
 
+            FlxG.collide(floor,player,spriteCollide2);
+            FlxG.collide(leftWall,player,spriteCollide2);
+            FlxG.collide(rightWall,player,spriteCollide2);
+
             if(FlxG.keys.DOWN){
                 FlxG.switchState(new PlayState());
-            } else if(FlxG.keys.UP){
-                FlxG.switchState(new MenuState());
             }
         }
     }
