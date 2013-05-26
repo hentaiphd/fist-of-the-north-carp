@@ -19,8 +19,8 @@ package
             ripple.play("rippling");
 
             var t:FlxText;
-            t = new FlxText(0,FlxG.height/2+40,FlxG.width,"(fist of the north carp)\nbased on a true story\n\nNina Freeman, Emmett Butler #fishingjam");
-            t.size = 22;
+            t = new FlxText(0,FlxG.height/2+40,FlxG.width,"(fist of the north carp)\nbased on a true story\n\nNina Freeman, Emmett Butler\naudio by David Coss - #fishingjam");
+            t.size = 18;
             t.color = 0xff109cee;
             t.alignment = "center";
             add(t);
@@ -33,7 +33,6 @@ package
             t.size = 20;
             t.color = 0xff109cee;
             add(t);
-
 
             FlxG.mouse.hide();
         }
