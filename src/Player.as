@@ -20,22 +20,20 @@ package{
             super(20, 340);
 
             loadGraphic(ImgPlayer, true, true, 48, 80, true);
-            addAnimation("standing", [11]);
-            addAnimation("running", [7,8,9,10]);
-            addAnimation("crouching", [3]);
-            addAnimation("jumping", [4]);
-            addAnimation("apex", [5]);
-            addAnimation("falling", [6]);
-            addAnimation("fishslap", [1,2]);
-
             frameWidth = 48;
             frameHeight = 80;
             width = 30
 
+            addAnimation("run", [7,8,9,10], 14, true);
+            addAnimation("standing", [11]);
+            addAnimation("crouching", [3]);
+            addAnimation("jumping", [4]);
+            addAnimation("apex", [5]);
+            addAnimation("falling", [6]);
+            addAnimation("fishslap", [1,2], 14, false);
+
             drag.x = runSpeed*8;
             drag.y = runSpeed*3;
-
-            play("standing");
         }
 
         override public function update():void{
@@ -44,20 +42,15 @@ package{
             acceleration.x = 0;
             acceleration.y = 1000;
 
+
             if(FlxG.keys.LEFT) {
                 facing = LEFT;
                 x -= runSpeed;
-                if(!running){
-                    running = true;
-                    play("running");
-                }
+                play("run");
             } else if(FlxG.keys.RIGHT){
                 facing = RIGHT;
                 x += runSpeed;
-                if(!running){
-                    running = true;
-                    play("running");
-                }
+                play("run");
             } else {
                 play("standing");
                 running = false;
