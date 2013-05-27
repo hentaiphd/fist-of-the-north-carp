@@ -25,6 +25,7 @@ package{
         [Embed(source="../assets/fish_11.png")] private var ImgFish11:Class;
         [Embed(source="../assets/fish_12.png")] private var ImgFish12:Class;
         [Embed(source="../assets/ripple.png")] private var ImgRipple:Class;
+        [Embed(source="../assets/fishtheme.mp3")] private var SndBGM:Class;
 
         public var _world:b2World;
         private var ratio:Number = 30;
@@ -85,6 +86,8 @@ package{
 
             zoomCam = new ZoomCamera(0, 0, 640, 480);
             FlxG.resetCameras(zoomCam);
+
+            FlxG.music.resume();
         }
 
         private function setupWorld():void{
@@ -147,6 +150,7 @@ package{
                     makeFish(sizeCounter);
                 } else {
                     player.fishSlap();
+                    FlxG.music.pause();
                     FlxG.play(sfxFishslap);
                     zoomCam.target = player;
                     zoomCam.targetZoom = 2.5;
@@ -200,7 +204,7 @@ package{
 
             if(_endgameActive){
                 if(FlxG.keys.DOWN){
-                    FlxG.switchState(new PlayState());
+                    FlxG.resetState();
                 }
             }
         }

@@ -6,6 +6,7 @@ package
         [Embed(source="../assets/bg.png")] private var ImgBG:Class;
         [Embed(source="../assets/logo.png")] private var ImgLogo:Class;
         [Embed(source="../assets/ripple.png")] private var ImgRipple:Class;
+        [Embed(source="../assets/fishtheme.mp3")] private var SndBGM:Class;
 
         override public function create():void{
 
@@ -33,6 +34,8 @@ package
             t.size = 20;
             t.color = 0xff109cee;
             add(t);
+
+            FlxG.playMusic(SndBGM);
 
             FlxG.mouse.hide();
         }
