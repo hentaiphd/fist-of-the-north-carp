@@ -87,7 +87,14 @@ package{
             zoomCam = new ZoomCamera(0, 0, 640, 480);
             FlxG.resetCameras(zoomCam);
 
-            FlxG.music.resume();
+            if(FlxG.music == null){
+                FlxG.playMusic(SndBGM);
+            } else {
+                FlxG.music.resume();
+                if(!FlxG.music.active){
+                    FlxG.playMusic(SndBGM);
+                }
+            }
         }
 
         private function setupWorld():void{
