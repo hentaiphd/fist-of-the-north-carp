@@ -8,6 +8,7 @@ package{
 
     public class Dad{
         [Embed(source="../assets/dad_sprites.png")] private var ImgDad:Class;
+        [Embed(source="../assets/haha.png")] private var ImgHaha:Class;
 
         public var _world:b2World;
         private var ratio:Number = 30;
@@ -17,6 +18,7 @@ package{
         private var hookJoint:b2RevoluteJoint;
         private var link:b2Body;
         private var dadSprite:FlxSprite;
+        private var hahaSprite:FlxSprite;
 
         public static const RODBITS:Number = 1;
         public static const LINEBITS:Number = 2;
@@ -28,6 +30,12 @@ package{
             dadSprite.addAnimation("stand", [1]);
             dadSprite.addAnimation("leanfwd", [0]);
             FlxG.state.add(dadSprite);
+
+            hahaSprite = new FlxSprite(x-60, y+60);
+            hahaSprite.loadGraphic(ImgHaha, true, true, 70, 20, true);
+            hahaSprite.addAnimation("hop", [0, 1], 1, true);
+            FlxG.state.add(hahaSprite);
+            hahaSprite.play("hop");
 
             this._world = _world;
 
