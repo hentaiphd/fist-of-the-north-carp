@@ -146,7 +146,7 @@ package{
         public function spriteCollide2(floor:B2FlxTileblock,player:Player):void{}
         public function deadFishCollide(dead:FlxSprite,player:Player):void{}
         public function spriteCollide(fish:B2FlxSprite,player:Player):void{
-            if(_timer - player.lastUnhookTime > .3){
+            if(_timer - player.lastUnhookTime > .8){
                 if(player.isTouching(FlxObject.DOWN) && fish.isTouching(FlxObject.UP)){
                     deadFish.add(fish);
                     FlxG.play(sfxFishscore);

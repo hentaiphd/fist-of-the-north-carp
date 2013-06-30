@@ -22,7 +22,7 @@ package{
             loadGraphic(ImgPlayer, true, true, 48, 80, true);
             frameWidth = 48;
             frameHeight = 80;
-            width = 30
+            width = 20
 
             addAnimation("run", [7,8,9,10], 14, true);
             addAnimation("standing", [11]);
