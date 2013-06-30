@@ -19,10 +19,15 @@ package
             add(ripple);
             ripple.play("rippling");
 
+            var op:FlxSprite = new FlxSprite(0, 0);
+            op.makeGraphic(640, 480);
+            op.fill(0x66000000);
+            add(op);
+
             var t:FlxText;
             t = new FlxText(0,FlxG.height/2+40,FlxG.width,"(fist of the north carp)\nbased on a true story\n\nNina Freeman, Emmett Butler\naudio by Deckman Coss - #fishingjam");
             t.size = 18;
-            t.color = 0xff109cee;
+            t.color = 0xffffffff;
             t.alignment = "center";
             add(t);
 
@@ -32,7 +37,7 @@ package
             t = new FlxText(0,FlxG.height-40,FlxG.width,"DOWN to play, UP to instructions");
             t.alignment = "center";
             t.size = 20;
-            t.color = 0xff109cee;
+            t.color = 0xffffffff;
             add(t);
 
             FlxG.playMusic(SndBGM);
