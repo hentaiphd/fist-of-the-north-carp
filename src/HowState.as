@@ -30,8 +30,9 @@ package
             var t:FlxText = new FlxText(0,30,FlxG.width,"DOWN to play");
             t.alignment = "center";
             t.size = 22;
+
             t.color = 0xffffffff;
-            t.text = "FISHING WITH DAD\n\nArrow keys run and jump\nHelp dad by pulling his fish off the line.\nJump on top of fish to remove\nDad's a goofball...\nso don't get fishslapped";
+            t.text = "FISHING WITH DAD\n\nJump: Up arrow key or space bar.\nRun: Left & right arrow keys.\n\nJump on top of fish to get them off the hook.\nDad's a goofball...\nso don't get fishslapped!";
             add(t);
 
             t = new FlxText(0,FlxG.height-40,FlxG.width,"DOWN to play");
