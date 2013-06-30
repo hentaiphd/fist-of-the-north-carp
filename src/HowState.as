@@ -22,17 +22,22 @@ package
             add(ripple);
             ripple.play("rippling");
 
+            var op:FlxSprite = new FlxSprite(0, 0);
+            op.makeGraphic(640, 480);
+            op.fill(0x55000000);
+            add(op);
+
             var t:FlxText = new FlxText(0,30,FlxG.width,"DOWN to play");
             t.alignment = "center";
             t.size = 22;
-            t.color = 0xffe75c70;
+            t.color = 0xffffffff;
             t.text = "FISHING WITH DAD\n\nArrow keys run and jump\nHelp dad by pulling his fish off the line.\nJump on top of fish to remove\nDad's a goofball...\nso don't get fishslapped";
             add(t);
 
             t = new FlxText(0,FlxG.height-40,FlxG.width,"DOWN to play");
             t.alignment = "center";
             t.size = 20;
-            t.color = 0xff109cee;
+            t.color = 0xffffffff;
             add(t);
 
             floor = new B2FlxTileblock(0, 430, 640, 50, null);
